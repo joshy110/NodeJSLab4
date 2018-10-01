@@ -1,5 +1,11 @@
-function VerAcrchivoEntrada(cadena) {
-	var Cadena = "{(Hola)}"
+
+var lib = require('readline');
+var interface1 = lib.createInterface({
+	input: process.stdin,
+	output: process.stdout
+});
+interface1.question('Ingrese una cadena  ', function (cadena) {
+	//var cadena = "{(Hola)}"
 	var contadorAbrePar = 0;
 	var contadorCierraPar = 0;
 	var contadorLlavesAbre = 0;
@@ -7,42 +13,67 @@ function VerAcrchivoEntrada(cadena) {
 	var contCorcheAbre = 0;
 	var contCorcheCierre = 0;
 
-	for (var i = 0; Cadena.length; i++){
+	for (var i = 0; cadena.length; i++) {
 		//------------ Parentesis ------------
-		if(Cadena[i]==="("){
+		if (cadena[i] === "(") {
 			contadorAbrePar = contadorAbrePar + 1;
-			console.log("Cantidad Parentesis Abre: " + contadorAbrePar);
 		}
-		if(Cadena[i]===")"){
+		if (cadena[i] === ")") {
 			contadorCierraPar = contadorCierraPar + 1;
-			console.log("Cantidad Parentesis Cierres: " + contadorCierraPar);
 		}
 		//  ------------------ Llaves -----------
-		if(Cadena[i]==="["){
+		if (cadena[i] === "[") {
 			contadorLlavesAbre = contadorLlavesAbre + 1;
-			console.log("Cantidad Parentesis Abre: " + contadorLlavesAbre);
 		}
-		if(Cadena[i]==="]"){
+		if (cadena[i] === "]") {
 			contadorLlavesCierra = contadorLlavesCierra + 1;
-			console.log("Cantidad Parentesis Cierres: " + contadorLlavesCierra);
 		}
 		//-------------- Corchetes ------------------
-		if(Cadena[i]==="{"){
+		if (cadena[i] === "{") {
 			contCorcheAbre = contCorcheAbre + 1;
-			console.log("Cantidad Parentesis Abre: " + contCorcheAbre);
 		}
-		if(Cadena[i]==="}"){
+		if (cadena[i] === "}") {
 			contCorcheCierre = contCorcheCierre + 1;
-			console.log("Cantidad Parentesis Cierres: " + contCorcheCierre);
+		}
+		if(i === cadena.length){
+			break;
 		}
 	}
-	
-	if(contadorAbrePar === contadorCierraPar){
-		console.log("Todo Bien");
-	}
-	else{
-		console.log("Todo Mal");
-	}
-}
 
-var Parentesis = VerAcrchivoEntrada();
+	// Validador de la cadena
+	console.log("----------------------------------------------");
+	if (contadorAbrePar == contadorCierraPar) {
+		console.log("Cantidad Parentesis Abre: " + contadorAbrePar);
+		console.log("Cantidad Parentesis Cierres: " + contadorCierraPar);
+		console.log("Lectura de Parentesis Bien");
+	}
+	else {
+		console.log("Cantidad Parentesis Abre: " + contadorAbrePar);
+		console.log("Cantidad Parentesis Cierres: " + contadorCierraPar);
+		console.log("Lectura de Parentesis Mal");
+	}
+	console.log("----------------------------------------------");
+
+	if (contadorLlavesAbre == contadorLlavesCierra) {
+		console.log("Cantidad Llaves Abre: " + contadorLlavesAbre);
+		console.log("Cantidad Llaves Cierres: " + contadorLlavesCierra);
+		console.log("Lectura de Llaves Bien");
+	}
+	else {
+		console.log("Lectura de Llaves Mal");
+	}
+	console.log("----------------------------------------------");
+
+	if (contCorcheAbre == contCorcheCierre) {
+		console.log("Cantidad Corchetes Abre: " + contCorcheAbre);
+		console.log("Cantidad Corchetes Cierres: " + contCorcheCierre);
+		console.log("Lectura de Corchetes Bien");
+	}
+	else {
+		console.log("Cantidad Corchetes Abre: " + contCorcheAbre);
+		console.log("Cantidad Corchetes Cierres: " + contCorcheCierre);
+		console.log("Lectura de Corchete Mal");
+	}
+
+	interface1.close();
+});
